@@ -1,0 +1,37 @@
+from selenium import webdriver
+from selenium.webdriver.common.keys import Keys
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+
+browser = webdriver.Ie()
+browser.get('https://sales4.sf.aruze.co.jp')
+userid = browser.find_element_by_name("NAME")
+userid.clear()
+userid.send_keys("901884")
+btn = browser.find_element_by_name("btnEnter")
+btn.click()
+wait = WebDriverWait(browser, 10)
+wait.until(EC.presence_of_element_located((By.ID, 'InfoTitle')))
+href = browser.find_element_by_xpath("//html[1]/body[1]/table[2]/tbody[1]/tr[1]/td[2]/table[1]/tbody[1]/tr[1]/td[1]/table[1]/tbody[1]/tr[2]/td[1]/a[1]")
+href.click()
+wait.until(EC.presence_of_element_located((By.NAME, 'thisForm')))
+href = browser.find_element_by_xpath("//html[1]/body[1]/div[1]/a[3]")
+href.click()
+wait.until(EC.presence_of_element_located((By.ID, 'TABLE1')))
+href = browser.find_element_by_xpath("//tr[contains(@class, 'Today')]/td[2]/a[1]")
+href.click()
+wait.until(EC.presence_of_element_located((By.ID, 'a_cls')))
+browser.find_element_by_xpath("//select[@name='a_cls']/option[@value='9000']").click()
+browser.find_element_by_id("btnNext").click()
+wait.until(EC.presence_of_element_located((By.ID, 'chkHealthStatus')))
+browser.find_element_by_id("chkHealthStatus").click()
+browser.execute_script("document.getElementById('reason').setAttribute('value', 'テロップ画面レビュー、テスト')")
+browser.find_element_by_xpath("//select[@name='EndH']/option[@value='20']").click()
+browser.find_element_by_xpath("//select[@name='EndM1']/option[@value='3']").click()
+browser.find_element_by_xpath("//select[@name='EndM2']/option[@value='0']").click()
+browser.find_element_by_id("btnNext").click()
+wait.until(EC.presence_of_element_located((By.ID, 'btnEnter')))
+browser.find_element_by_id("btnEnter").click()
+wait.until(EC.presence_of_element_located((By.ID, 'btnMonthlyBack')))
+browser.find_element_by_id("btnMonthlyBack").click()
